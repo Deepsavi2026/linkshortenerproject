@@ -1,65 +1,126 @@
-import Image from "next/image";
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import Link from "next/link";
+import { Link2, Zap, BarChart2, Shield, Globe, ArrowRight } from "lucide-react";
+
+const features = [
+  {
+    icon: Zap,
+    title: "Lightning Fast",
+    description:
+      "Create short links in seconds. Our optimized infrastructure ensures instant redirects for your audience worldwide.",
+  },
+  {
+    icon: BarChart2,
+    title: "Detailed Analytics",
+    description:
+      "Track clicks, geographic data, and referral sources with a real-time dashboard to understand your audience.",
+  },
+  {
+    icon: Shield,
+    title: "Secure & Reliable",
+    description:
+      "Every link is protected and monitored. Enjoy 99.9% uptime so your links are always working when you need them.",
+  },
+  {
+    icon: Globe,
+    title: "Custom Short Links",
+    description:
+      "Brand your links with memorable, human-readable slugs that reinforce your identity with every share.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background font-sans">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-background sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-foreground">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-muted-foreground">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-foreground hover:underline"
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Hero */}
+      <section className="container mx-auto px-4 py-24 text-center">
+        <div className="flex justify-center mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-4 py-1.5 text-sm text-muted-foreground">
+            <Link2 className="h-4 w-4" />
+            Shorten. Share. Track.
+          </span>
+        </div>
+        <h1 className="mx-auto max-w-3xl text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+          Short links that work{" "}
+          <span className="text-primary/80">harder for you</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
+          Transform long, unwieldy URLs into clean, trackable links in one
+          click. Share confidently and measure what matters.
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <SignedOut>
+            <SignUpButton mode="modal">
+              <button className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
+                Get started for free
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </SignUpButton>
+            <SignInButton mode="modal">
+              <button className="inline-flex items-center rounded-full border border-border px-6 py-3 text-base font-semibold transition-colors hover:bg-accent hover:text-accent-foreground">
+                Sign in
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-foreground hover:underline"
+              Go to Dashboard
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </SignedIn>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="container mx-auto px-4 pb-24">
+        <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">
+          Everything you need to manage links
+        </h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map(({ icon: Icon, title, description }) => (
+            <div
+              key={title}
+              className="rounded-xl border border-border bg-card p-6 transition-colors hover:bg-accent/10"
             >
-              Learning
-            </a>{" "}
-            center.
+              <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
+                <Icon className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+              <p className="text-sm text-muted-foreground">{description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Banner */}
+      <section className="border-t border-border bg-card">
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h2 className="mb-4 text-3xl font-bold">Ready to get started?</h2>
+          <p className="mb-8 text-muted-foreground">
+            Join today and start shortening, sharing, and tracking your links.
           </p>
+          <SignedOut>
+            <SignUpButton mode="modal">
+              <button className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
+                Create your free account
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Go to Dashboard
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </SignedIn>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-5 transition-colors hover:bg-primary/90 md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-border px-5 transition-colors hover:bg-accent hover:text-accent-foreground md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
     </div>
   );
 }
