@@ -20,6 +20,9 @@ All agent instructions and coding standards are in separate files in `/docs`:
 
 - **[Authentication Guidelines](../docs/authentication.md)** - Clerk authentication standards and protected route implementation
 - **[UI Components Guidelines](../docs/ui-components.md)** - shadcn/ui component standards and usage rules
+- **[Database Guidelines](../docs/database.md)** - Drizzle ORM + Neon Postgres standards, schema conventions, and query patterns
+- **[Server Actions & Data Fetching Guidelines](../docs/server-actions.md)** - Server Action patterns, authentication checks, form bindings, error handling, and revalidation
+
 ## 🚀 Quick Reference
 
 ### Tech Stack
@@ -36,6 +39,7 @@ All agent instructions and coding standards are in separate files in `/docs`:
 3. **Database Access** - Only in Server Components and Server Actions
 4. **Authentication** - Always verify on server side
 5. **Styling** - Use Tailwind utilities and shadcn/ui components
+6. **Server Actions** - `'use server'` directive, auth check first, typed result objects, always revalidate
 
 ### Common Commands
 ```bash
