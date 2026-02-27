@@ -20,6 +20,9 @@ All agent instructions and coding standards are in separate files in `/docs`:
 
 - **[Authentication Guidelines](../docs/authentication.md)** - Clerk authentication standards and protected route implementation
 - **[UI Components Guidelines](../docs/ui-components.md)** - shadcn/ui component standards and usage rules
+- **[Database Guidelines](../docs/database.md)** - Drizzle ORM with Neon, schema design, query patterns, and migrations
+- **[Link Shortening Guidelines](../docs/link-shortening.md)** - Short code generation, redirect handling, Server Actions, and click tracking
+
 ## 🚀 Quick Reference
 
 ### Tech Stack
@@ -39,9 +42,13 @@ All agent instructions and coding standards are in separate files in `/docs`:
 
 ### Common Commands
 ```bash
-npm run dev        # Start development server
-npm run build      # Build for production
-npm run lint       # Run ESLint
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run lint         # Run ESLint
+npm run db:push      # Push schema changes to Neon (development)
+npm run db:generate  # Generate SQL migration files (production)
+npm run db:migrate   # Apply pending migrations (production)
+npm run db:studio    # Open Drizzle Studio to inspect data
 ```
 
 ### Path Aliases
