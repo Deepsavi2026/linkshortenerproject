@@ -25,7 +25,7 @@ All authentication in this application is handled exclusively by **Clerk**. No o
 ### 3. Sign In/Sign Up UI
 - **Always use modal interface** for Clerk sign-in and sign-up flows
 - Never use full-page redirects for authentication forms
-- Configure Clerk components to display as modals
+- Use `<SignInButton mode="modal">` and `<SignUpButton mode="modal">` — the `mode="modal"` prop is required
 
 ## Implementation Checklist
 
@@ -64,8 +64,31 @@ export default async function HomePage() {
 }
 ```
 
+### Modal Sign In/Sign Up Buttons
+```tsx
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+
+export function AuthButtons() {
+  return (
+    <>
+      <SignedOut>
+        <SignInButton mode="modal">
+          <button>Sign In</button>
+        </SignInButton>
+        <SignUpButton mode="modal">
+          <button>Sign Up</button>
+        </SignUpButton>
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </>
+  )
+}
+```
+
 ## Remember
 
 - Authentication checks should always happen on the **server side**
 - Never rely solely on client-side authentication state for security
-- All Clerk configuration should use modal mode for sign-in/sign-up
+- Always pass `mode="modal"` to `<SignInButton>` and `<SignUpButton>` — never omit this prop
