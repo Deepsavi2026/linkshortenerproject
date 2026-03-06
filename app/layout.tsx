@@ -34,7 +34,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className="dark">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+          className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
         >
           <header className="border-b bg-card">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
