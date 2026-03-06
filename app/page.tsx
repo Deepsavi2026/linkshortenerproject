@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Link2,
   BarChart3,
@@ -9,7 +8,9 @@ import {
   MousePointerClick,
   Globe,
 } from "lucide-react";
-import { SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignUpButton, SignInButton, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const features = [
   {
@@ -68,9 +69,12 @@ const steps = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  if (userId) redirect("/dashboard");
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-24 sm:py-32">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,oklch(0.4_0.15_264)_0%,transparent_60%)] opacity-30" />
@@ -96,23 +100,11 @@ export default function Home() {
                     <ArrowRight className="h-4 w-4" />
                   </button>
                 </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <Link
-                  href="/dashboard"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  Go to Dashboard
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </SignedIn>
-              <SignedOut>
-                <Link
-                  href="/dashboard"
-                  className="inline-flex h-12 items-center justify-center rounded-lg border border-border px-8 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  View Dashboard
-                </Link>
+                <SignInButton mode="modal">
+                  <button className="inline-flex h-12 items-center justify-center rounded-lg border border-border px-8 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
+                    Sign In
+                  </button>
+                </SignInButton>
               </SignedOut>
             </div>
           </div>
@@ -196,15 +188,6 @@ export default function Home() {
                 </button>
               </SignUpButton>
             </SignedOut>
-            <SignedIn>
-              <Link
-                href="/dashboard"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Go to Dashboard
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </SignedIn>
           </div>
         </div>
       </section>
