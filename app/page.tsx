@@ -74,7 +74,7 @@ export default async function Home() {
   if (userId) redirect("/dashboard");
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-24 sm:py-32">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,oklch(0.4_0.15_264)_0%,transparent_60%)] opacity-30" />
